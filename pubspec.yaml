@@ -1,0 +1,14 @@
+name: bit_convert
+description: Convert datatypes on a bit like level (int and String for now)
+version: 0.1.2
+homepage: https://bitbot.eu
+
+environment:
+  sdk: '>=2.17.0-182.2.beta <3.0.0'
+
+# dependencies:
+#   path: ^1.8.0
+
+dev_dependencies:
+  test: ^1.16.0
+  very_good_analysis: ^2.4.0
