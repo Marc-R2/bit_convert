@@ -10,3 +10,5 @@ build/
 pubspec.lock
 /.idea/libraries/Dart_SDK.xml
 /.idea/libraries/Dart_Packages.xml
+
+.idea/

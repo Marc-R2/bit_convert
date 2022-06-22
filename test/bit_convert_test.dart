@@ -55,8 +55,23 @@ Future<void> main() async {
     });
 
     group('string2int', () {
+      test('\x00', () {
+        expect(BitConvert.string2int('\x00'), 0);
+      });
       test('\x01', () {
         expect(BitConvert.string2int('\x01'), 1);
+      });
+      test('\x02', () {
+        expect(BitConvert.string2int('\x02'), 2);
+      });
+      test('\x03', () {
+        expect(BitConvert.string2int('\x03'), 3);
+      });
+      test('\x04', () {
+        expect(BitConvert.string2int('\x04'), 4);
+      });
+      test('\x05', () {
+        expect(BitConvert.string2int('\x05'), 5);
       });
       test('\f', () {
         expect(BitConvert.string2int('\f'), 12);
@@ -66,6 +81,12 @@ Future<void> main() async {
       });
       test('\x04Ò', () {
         expect(BitConvert.string2int('\x04Ò'), 1234);
+      });
+      test('\x01 with byteLen 6', () {
+        expect(BitConvert.string2int('\x01', byteLen: 6), 1);
+      });
+      test('\f with byteLen 6', () {
+        expect(BitConvert.string2int('\f', byteLen: 6), 12);
       });
     });
 
@@ -191,17 +212,181 @@ Future<void> main() async {
         expect(split[6], 'mn', reason: '[6] should not be ${split[6]}');
         expect(split[7], 'op', reason: '[7] should not be ${split[7]}');
       });
+
+      test('splitting with length 3', () {
+        final split = BitConvert.splitByLength('abcdefghijklmnop', 3);
+
+        expect(split.length, 6, reason: 'length of the result');
+        expect(split.first, 'abc', reason: 'first element"');
+        expect(split.last, 'p', reason: 'last element"');
+
+        expect(split[0], 'abc', reason: '[0] should not be ${split[0]}');
+        expect(split[1], 'def', reason: '[1] should not be ${split[1]}');
+        expect(split[2], 'ghi', reason: '[2] should not be ${split[2]}');
+        expect(split[3], 'jkl', reason: '[3] should not be ${split[3]}');
+        expect(split[4], 'mno', reason: '[4] should not be ${split[4]}');
+        expect(split[5], 'p', reason: '[5] should not be ${split[5]}');
+      });
+
+      test('splitting with length 4', () {
+        final split = BitConvert.splitByLength('abcdefghijklmnop', 4);
+
+        expect(split.length, 4, reason: 'length of the result');
+        expect(split.first, 'abcd', reason: 'first element"');
+        expect(split.last, 'mnop', reason: 'last element"');
+
+        expect(split[0], 'abcd', reason: '[0] should not be ${split[0]}');
+        expect(split[1], 'efgh', reason: '[1] should not be ${split[1]}');
+        expect(split[2], 'ijkl', reason: '[2] should not be ${split[2]}');
+        expect(split[3], 'mnop', reason: '[3] should not be ${split[3]}');
+      });
+
+      test('splitting with length 5', () {
+        final split = BitConvert.splitByLength('abcdefghijklmnop', 5);
+
+        expect(split.length, 4, reason: 'length of the result');
+        expect(split.first, 'abcde', reason: 'first element"');
+        expect(split.last, 'p', reason: 'last element"');
+
+        expect(split[0], 'abcde', reason: '[0] should not be ${split[0]}');
+        expect(split[1], 'fghij', reason: '[1] should not be ${split[1]}');
+        expect(split[2], 'klmno', reason: '[2] should not be ${split[2]}');
+        expect(split[3], 'p', reason: '[3] should not be ${split[3]}');
+      });
     });
 
-    group('stringFromBinary', () {
+    group('stringFromBinary bytelen=8 charshift=0', () {
+      test('reconstruct \x00', () {
+        expect(BitConvert.stringFromBinary('00000000'), '\x00');
+      });
+      test('reconstruct \x01', () {
+        expect(BitConvert.stringFromBinary('00000001'), '\x01');
+      });
+      test('reconstruct `', () {
+        expect(BitConvert.stringFromBinary('01100000'), '`');
+      });
       test('reconstruct a', () {
         expect(BitConvert.stringFromBinary('01100001'), 'a');
+      });
+      test('reconstruct b', () {
+        expect(BitConvert.stringFromBinary('01100010'), 'b');
+      });
+      test('reconstruct c', () {
+        expect(BitConvert.stringFromBinary('01100011'), 'c');
+      });
+      test('reconstruct d', () {
+        expect(BitConvert.stringFromBinary('01100100'), 'd');
+      });
+      test('reconstruct e', () {
+        expect(BitConvert.stringFromBinary('01100101'), 'e');
+      });
+      test('reconstruct f', () {
+        expect(BitConvert.stringFromBinary('01100110'), 'f');
+      });
+      test('reconstruct g', () {
+        expect(BitConvert.stringFromBinary('01100111'), 'g');
+      });
+      test('reconstruct h', () {
+        expect(BitConvert.stringFromBinary('01101000'), 'h');
+      });
+      test('reconstruct i', () {
+        expect(BitConvert.stringFromBinary('01101001'), 'i');
+      });
+      test('reconstruct j', () {
+        expect(BitConvert.stringFromBinary('01101010'), 'j');
+      });
+      test('reconstruct k', () {
+        expect(BitConvert.stringFromBinary('01101011'), 'k');
+      });
+      test('reconstruct l', () {
+        expect(BitConvert.stringFromBinary('01101100'), 'l');
+      });
+      test('reconstruct m', () {
+        expect(BitConvert.stringFromBinary('01101101'), 'm');
+      });
+      test('reconstruct n', () {
+        expect(BitConvert.stringFromBinary('01101110'), 'n');
+      });
+      test('reconstruct o', () {
+        expect(BitConvert.stringFromBinary('01101111'), 'o');
+      });
+      test('reconstruct p', () {
+        expect(BitConvert.stringFromBinary('01110000'), 'p');
+      });
+      test('reconstruct q', () {
+        expect(BitConvert.stringFromBinary('01110001'), 'q');
+      });
+      test('reconstruct r', () {
+        expect(BitConvert.stringFromBinary('01110010'), 'r');
+      });
+      test('reconstruct s', () {
+        expect(BitConvert.stringFromBinary('01110011'), 's');
+      });
+      test('reconstruct t', () {
+        expect(BitConvert.stringFromBinary('01110100'), 't');
+      });
+      test('reconstruct u', () {
+        expect(BitConvert.stringFromBinary('01110101'), 'u');
+      });
+      test('reconstruct v', () {
+        expect(BitConvert.stringFromBinary('01110110'), 'v');
+      });
+      test('reconstruct w', () {
+        expect(BitConvert.stringFromBinary('01110111'), 'w');
+      });
+      test('reconstruct x', () {
+        expect(BitConvert.stringFromBinary('01111000'), 'x');
+      });
+      test('reconstruct y', () {
+        expect(BitConvert.stringFromBinary('01111001'), 'y');
+      });
+      test('reconstruct z', () {
+        expect(BitConvert.stringFromBinary('01111010'), 'z');
+      });
+      test('reconstruct {', () {
+        expect(BitConvert.stringFromBinary('01111011'), '{');
+      });
+      test('reconstruct |', () {
+        expect(BitConvert.stringFromBinary('01111100'), '|');
+      });
+      test('reconstruct }', () {
+        expect(BitConvert.stringFromBinary('01111101'), '}');
+      });
+      test('reconstruct ~', () {
+        expect(BitConvert.stringFromBinary('01111110'), '~');
+      });
+      test('reconstruct ', () {
+        expect(BitConvert.stringFromBinary('01111111'), '');
+      });
+      test('reconstruct ', () {
+        expect(BitConvert.stringFromBinary('10000000'), '');
+      });
+      test('reconstruct ', () {
+        expect(BitConvert.stringFromBinary('10000001'), '');
+      });
+      test('reconstruct ', () {
+        expect(BitConvert.stringFromBinary('10000010'), '');
+      });
+      test('reconstruct ', () {
+        expect(BitConvert.stringFromBinary('10000011'), '');
+      });
+      test('reconstruct ', () {
+        expect(BitConvert.stringFromBinary('10000100'), '');
       });
       test('reconstruct ä', () {
         expect(BitConvert.stringFromBinary('11100100'), 'ä');
       });
       test('reconstruct aä', () {
         expect(BitConvert.stringFromBinary('0110000111100100'), 'aä');
+      });
+      test('reconstruct uuu', () {
+        expect(BitConvert.stringFromBinary('011101010111010101110101'), 'uu');
+      });
+    });
+
+    group('stringFromBinary bytelen=6 charshift=32', () {
+      test('reconstruct \x00', () {
+        expect(BitConvert.stringFromBinary('00000000', 6, 32), '\x00');
       });
     });
 
