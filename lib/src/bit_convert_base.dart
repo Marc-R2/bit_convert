@@ -6,7 +6,7 @@ class BitConvert {
   static String int2string(int i, {int byteLen = 8, int charShift = 0}) {
     var bi = i.toRadixString(2);
     bi = bi.padLeft(bi.length + (byteLen - (bi.length % byteLen)), '0');
-    return stringFromBinary(bi, byteLen, charShift);
+    return stringFromBinary(bi, byteLen: byteLen, charShift: charShift);
   }
 
   /// Translates the bits of a String into an int
@@ -35,10 +35,10 @@ class BitConvert {
 
   /// Converts binary to a String
   static String stringFromBinary(
-      String bi, [
-        int byteLen = 8,
-        int charShift = 0,
-      ]) {
+    String bi, {
+    int byteLen = 8,
+    int charShift = 0,
+  }) {
     // Convert Binary [bi] with [byteLen] bits to List<int> and add [charShift]
     final charCodes = splitByLength(bi, byteLen).map<int>((m) {
       return int.parse(m, radix: 2) + charShift;
@@ -49,10 +49,10 @@ class BitConvert {
 
   /// Converts a String into binary
   static String stringToBinary(
-      String s, [
-        int byteLen = 8,
-        int charShift = 0,
-      ]) {
+    String s, [
+    int byteLen = 8,
+    int charShift = 0,
+  ]) {
     // Convert String to List<int> and map these ints to binary
     return s.codeUnits.map((int strInt) {
       return (strInt - charShift).toRadixString(2).padLeft(byteLen, '0');
