@@ -385,8 +385,25 @@ Future<void> main() async {
     });
 
     group('stringFromBinary bytelen=6 charshift=32', () {
-      test('reconstruct \x00', () {
-        expect(BitConvert.stringFromBinary('00000000', 6, 32), '\x00');
+      test('6x32 reconstruct \x00', () {
+        expect(
+          BitConvert.stringFromBinary(
+            '000000',
+            byteLen: 6,
+            charShift: 32,
+          ),
+          '\x00',
+        );
+      });
+      test('6x32 reconstruct \x01', () {
+        expect(
+          BitConvert.stringFromBinary(
+            '000001',
+            byteLen: 6,
+            charShift: 32,
+          ),
+          '\x01',
+        );
       });
     });
 
