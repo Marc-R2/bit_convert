@@ -380,29 +380,29 @@ Future<void> main() async {
         expect(BitConvert.stringFromBinary('0110000111100100'), 'aä');
       });
       test('reconstruct uuu', () {
-        expect(BitConvert.stringFromBinary('011101010111010101110101'), 'uu');
+        expect(BitConvert.stringFromBinary('011101010111010101110101'), 'uuu');
       });
     });
 
     group('stringFromBinary bytelen=6 charshift=32', () {
-      test('6x32 reconstruct \x00', () {
+      test('6x32 reconstruct  ', () {
         expect(
           BitConvert.stringFromBinary(
             '000000',
             byteLen: 6,
             charShift: 32,
           ),
-          '\x00',
+          ' ',
         );
       });
-      test('6x32 reconstruct \x01', () {
+      test('6x32 reconstruct !', () {
         expect(
           BitConvert.stringFromBinary(
             '000001',
             byteLen: 6,
             charShift: 32,
           ),
-          '\x01',
+          '!',
         );
       });
     });
