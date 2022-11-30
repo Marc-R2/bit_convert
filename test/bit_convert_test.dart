@@ -168,6 +168,34 @@ Future<void> main() async {
       });
     });
 
+    // 65536 - 16 - 128: 6min 30sec
+    // 65536 - 12 -  64: 2min 27sec
+    test('int2int reconstruct', () {
+      for (var num = 1; num < 65536; num += 11) {
+        print('reconstruct $num');
+        for (var byteLen = 1; byteLen < 12; byteLen++) {
+          for (var charShift = 0; charShift < 64; charShift++) {
+            final numStr = BitConvert.int2string(
+              num,
+              byteLen: byteLen,
+              charShift: charShift,
+            );
+            final numInt = BitConvert.string2int(
+              numStr,
+              byteLen: byteLen,
+              charShift: charShift,
+            );
+            expect(
+              num == numInt,
+              isTrue,
+              reason: '$num -> byteLen $byteLen -> charShift $charShift -> '
+                  'numStr $numStr -> numInt $numInt',
+            );
+          }
+        }
+      }
+    });
+
     group('splitByLength', () {
       test('splitting with length 1', () {
         final split = BitConvert.splitByLength('abcdefghijklmnop', 1);
