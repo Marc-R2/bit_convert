@@ -171,7 +171,7 @@ Future<void> main() async {
     // 65536 - 16 - 128: 6min 30sec
     // 65536 - 12 -  64: 2min 27sec
     test('int2int reconstruct', () {
-      for (var num = 1; num < 65536; num += 11) {
+      for (var num = 1; num < 65536; num += 1) {
         print('reconstruct $num');
         for (var byteLen = 1; byteLen < 12; byteLen++) {
           for (var charShift = 0; charShift < 64; charShift++) {

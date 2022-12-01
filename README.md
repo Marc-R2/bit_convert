@@ -11,6 +11,9 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
+[![Dart](https://github.com/Marc-R2/bit_convert/actions/workflows/dart.yml/badge.svg)](https://github.com/Marc-R2/com/actions/workflows/dart.yml)
+[![codecov](https://codecov.io/gh/Marc-R2/bit_convert/branch/master/graph/badge.svg?token=9IK2AE76P4)](https://codecov.io/gh/Marc-R2/com)
+
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 
