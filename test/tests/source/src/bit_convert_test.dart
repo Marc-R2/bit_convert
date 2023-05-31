@@ -76,4 +76,9 @@ class BitConvertTest extends BitConvertTestTop {
       },
     );
   }
+
+  @override
+  void correctForKnownTimesTest() {
+    // TODO: implement correctForKnownTimesTest
+  }
 }
