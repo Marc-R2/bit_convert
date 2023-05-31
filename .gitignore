@@ -12,3 +12,5 @@ pubspec.lock
 /.idea/libraries/Dart_Packages.xml
 
 .idea/
+
+**/*.test_gen.dart

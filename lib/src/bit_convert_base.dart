@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:test_builder_annotation/test_builder_annotation.dart';
+
 /// BitConvert - convert on bit-level
+@TestGen()
 class BitConvert {
   /// Translates the bits of an int into a String
   static String int2string(int i, {int byteLen = 8, int charShift = 0}) {
@@ -63,16 +66,28 @@ class BitConvert {
   /// with byteLen 6 and char-shift 48
   /// Expects a string of length 7 to 8
   static String getTimeString([DateTime? dateTime]) {
-    return int2string(
-      (dateTime ?? DateTime.now()).millisecondsSinceEpoch,
+    final ms = (dateTime ?? DateTime.now()).millisecondsSinceEpoch;
+    final str = int2string(
+      ms,
       byteLen: 6,
       charShift: 48,
     ).replaceAll(r'\', 'z');
+    return correctForKnownTimes(ms, str);
+  }
+
+  static final knownTimes = <int, int>{};
+
+  static String correctForKnownTimes(int timeMS, String str) {
+    final count = knownTimes[timeMS] ??= 0;
+    knownTimes[timeMS] = count + 1;
+    if (count == 0) return str;
+    return '$str!${count.toRadixString(36)}';
   }
 
   /// Convert time string to DateTime
   /// with byteLen 6 and char-shift 48
-  static DateTime timeString2DateTime(String timeString) {
+  static DateTime timeString2DateTime(String timeStringRaw) {
+    final timeString = timeStringRaw.replaceAll(RegExp('![0-9a-z]+'), '');
     return DateTime.fromMillisecondsSinceEpoch(
       string2int(timeString.replaceAll('z', r'\'), byteLen: 6, charShift: 48),
     );
