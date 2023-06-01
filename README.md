@@ -1,42 +1,128 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+# BitConvert
 
 [![Dart](https://github.com/Marc-R2/bit_convert/actions/workflows/dart.yml/badge.svg)](https://github.com/Marc-R2/com/actions/workflows/dart.yml)
-[![codecov](https://codecov.io/gh/Marc-R2/bit_convert/branch/master/graph/badge.svg?token=9IK2AE76P4)](https://codecov.io/gh/Marc-R2/com)
+[![codecov](https://codecov.io/gh/Marc-R2/bit_convert/branch/master/graph/badge.svg?token=9IK2AE76P4)](https://codecov.io/gh/Marc-R2/bit_convert)
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+The `BitConvert` class provides methods for converting between integers and binary strings on a bit-level.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+1. Import the `BitConvert` class by adding the following line at the beginning of your Dart file:
+
+    ```dart
+    import 'package:bit_convert/bit_convert.dart';
+    ```
+
+2. Use the static methods of the `BitConvert` class to perform the desired conversions.
+
+## Methods
+
+### `int2string`
 
 ```dart
-const like = 'sample';
+static String int2string(int i, {int byteLen = 8, int charShift = 0})
 ```
 
-## Additional information
+Translates the bits of an integer into a string representation.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+- `i`: The integer value to convert.
+- `byteLen`: The number of bits per byte (default: 8).
+- `charShift`: The character shift value (default: 0).
+
+Returns the string representation of the binary bits.
+
+### `string2int`
+
+```dart
+static int string2int(String s, {int byteLen = 8, int charShift = 0})
+```
+
+Translates a string of bits into an integer.
+
+- `s`: The string of bits to convert.
+- `byteLen`: The number of bits per byte (default: 8).
+- `charShift`: The character shift value (default: 0).
+
+Returns the integer value corresponding to the binary bits.
+
+### `splitByLength`
+
+```dart
+static List<String> splitByLength(String str, int n)
+```
+
+Splits a string into chunks of a specified length.
+
+- `str`: The string to split.
+- `n`: The length of each chunk.
+
+Returns a list of strings representing the chunks.
+
+### `stringFromBinary`
+
+```dart
+static String stringFromBinary(String bi, {int byteLen = 8, int charShift = 0})
+```
+
+Converts a binary string to a string representation.
+
+- `bi`: The binary string to convert.
+- `byteLen`: The number of bits per byte (default: 8).
+- `charShift`: The character shift value (default: 0).
+
+Returns the string representation of the binary string.
+
+### `stringToBinary`
+
+```dart
+static String stringToBinary(String s, [int byteLen = 8, int charShift = 0])
+```
+
+Converts a string into a binary string.
+
+- `s`: The string to convert.
+- `byteLen`: The number of bits per byte (default: 8).
+- `charShift`: The character shift value (default: 0).
+
+Returns the binary string representation of the input string.
+
+### `getTimeString`
+
+```dart
+static String getTimeString([DateTime? dateTime])
+```
+
+Gets the current time in milliseconds converted to a string representation.
+
+- `dateTime`: Optional DateTime object representing the specific time to convert (default: current time).
+
+Returns the time string representation.
+
+### `correctForKnownTimes`
+
+```dart
+static String correctForKnownTimes(int timeMS, String str)
+```
+
+Corrects the time string representation for known times.
+
+- `timeMS`: The time in milliseconds.
+- `str`: The original time string representation.
+
+Returns the corrected time string representation.
+
+### `timeString2DateTime`
+
+```dart
+static DateTime timeString2DateTime(String timeStringRaw)
+```
+
+Converts a time string to a DateTime object.
+
+- `timeStringRaw`: The raw time string.
+
+Returns a DateTime object representing the converted time.
+
+## Known Times
+
+The `BitConvert` class maintains a record of known times to correct for duplicate time string representations.
