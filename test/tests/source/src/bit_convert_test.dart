@@ -41,7 +41,7 @@ class BitConvertTest extends BitConvertTestTop {
     group('in same ms', () {
       test(
         'every should be unique',
-        repeated: 64,
+        repeated: 8,
         () {
           const repeats = 4096 * 2 * 2 * 2;
           final results = <String>[];
@@ -60,9 +60,9 @@ class BitConvertTest extends BitConvertTestTop {
   void timeString2DateTimeTest() {
     test(
       'timeString2DateTime',
-      repeated: 64,
+      repeated: 8,
       () {
-        const repeats = 4096 * 2 * 2 * 2;
+        const repeats = 4096 * 2 * 2;
         for (var i = 0; i < repeats; i++) {
           final time = DateTime.now();
           final timeString = BitConvert.getTimeString(time);

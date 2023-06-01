@@ -14,3 +14,5 @@ pubspec.lock
 .idea/
 
 **/*.test_gen.dart
+
+**/mutation-test-report/**

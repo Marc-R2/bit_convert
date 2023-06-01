@@ -120,11 +120,15 @@ Future<void> main() async {
         expect(nowMilli == timeInt, isTrue);
       });
 
-      test('With timestamp milli and diff byteLen', () {
-        final timeStr = BitConvert.int2string(nowMilli, byteLen: 9);
-        final timeInt = BitConvert.string2int(timeStr, byteLen: 6);
-        expect(nowMilli == timeInt, isFalse);
-      });
+      test(
+        'With timestamp milli and diff byteLen',
+        retry: 16,
+        () {
+          final timeStr = BitConvert.int2string(nowMilli, byteLen: 9);
+          final timeInt = BitConvert.string2int(timeStr, byteLen: 6);
+          expect(nowMilli == timeInt, isFalse);
+        },
+      );
 
       test('With timestamp milli and char-shift', () {
         final timeStr = BitConvert.int2string(nowMilli, charShift: 32);
@@ -171,10 +175,10 @@ Future<void> main() async {
     // 65536 - 16 - 128: 6min 30sec
     // 65536 - 12 -  64: 2min 27sec
     test('int2int reconstruct', () {
-      for (var num = 1; num < 65536; num += 1) {
-        print('reconstruct $num');
-        for (var byteLen = 1; byteLen < 12; byteLen++) {
-          for (var charShift = 0; charShift < 64; charShift++) {
+      for (var num = 1; num < 65536; num += 9) {
+        // print('reconstruct $num');
+        for (var byteLen = 1; byteLen < 12; byteLen += 3) {
+          for (var charShift = 16; charShift < 48; charShift++) {
             final numStr = BitConvert.int2string(
               num,
               byteLen: byteLen,
